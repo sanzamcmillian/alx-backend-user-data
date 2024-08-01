@@ -5,6 +5,4 @@ import bcrypt
 
 def hash_password(password: str) -> bytes:
     """Method to encrypt a password"""
-    password = password.encode("utf-8")
-    salt = bcrypt.gensalt()
-    return bcrypt.hashpw(password, salt)
+    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
