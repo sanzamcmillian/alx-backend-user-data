@@ -48,6 +48,27 @@ def get_logger() -> logging.Logger:
     return logger
 
 
+def main():
+    """main function"""
+    fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    col = fields.split(',')
+    query = "SELECT {} FROM users".format(fields)
+    log = get_logger()
+    connection = get_db()
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        for row in rows:
+            record = map(
+                lambda x: "{}={}".format(x[0], x[1]),
+                zip(col, row)
+            )
+            msg = "{};".format("; ".join(list(record)))
+            args = ("user_data", logging.INFO, None, None, msg, None, None)
+            log_record = logging.LogRecord(*args)
+            log.handle(log_record)
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
         """
@@ -66,3 +87,7 @@ class RedactingFormatter(logging.Formatter):
         msg = super(RedactingFormatter, self).format(record)
         txt = filter_datum(self.fields, self.REDACTION, msg, self.SEPARATOR)
         return txt
+
+
+if __name__ == "__main__":
+    main()
