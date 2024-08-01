@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """filter data"""
 import re
+import logging
 from typing import List
 
 
@@ -15,3 +16,18 @@ def filter_datum(fields: List[str], redaction: str,
     """Function to filter data using Regex"""
     extract, replace = (patterns["extract"], patterns["replace"])
     return re.sub(extract(fields, separator), replace(redaction), message)
+
+
+class RedactingFormatter(logging.Formatter):
+    """ Redacting Formatter class
+        """
+
+    REDACTION = "***"
+    FORMAT = "[HOLBERTON] %(name)s %(levelname)s %(asctime)-15s: %(message)s"
+    SEPARATOR = ";"
+
+    def __init__(self):
+        super(RedactingFormatter, self).__init__(self.FORMAT)
+
+    def format(self, record: logging.LogRecord) -> str:
+        NotImplementedError
