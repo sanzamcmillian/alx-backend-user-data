@@ -10,7 +10,8 @@ patterns = {
 }
 
 
-def filter_datum(fields, redaction, message, separator):
+def filter_datum(fields: List[str], redaction: str,
+                 message: str, separator: str) -> str:
     """Function to filter data using Regex"""
     extract, replace = (patterns["extract"], patterns["replace"])
     return re.sub(extract(fields, separator), replace(redaction), message)
