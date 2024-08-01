@@ -3,6 +3,8 @@
 import re
 import logging
 from typing import List
+import mysql.connector
+import os
 
 
 patterns = {
@@ -10,6 +12,22 @@ patterns = {
     'replace': lambda x: r"\g<field>={}".format(x),
 }
 PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """Function to create a connector to mysql db"""
+    db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "")
+    db_user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
+    db_psswd = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    connnection = mysql.connector.connect(
+        host=db_host,
+        port=3306,
+        user=db_user,
+        password=db_psswd,
+        database=db_name,
+    )
+    return connnection
 
 
 def filter_datum(fields: List[str], redaction: str,
