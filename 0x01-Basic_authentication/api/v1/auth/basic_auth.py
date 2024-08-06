@@ -7,6 +7,7 @@ import binascii
 from typing import Tuple, TypeVar
 from models.user import User
 
+
 class BasicAuth(Auth):
     """class basic auth"""
     def extract_base64_authorization_header(
