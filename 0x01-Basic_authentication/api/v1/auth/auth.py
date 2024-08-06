@@ -23,7 +23,9 @@ class Auth:
         return True
 
     def authorization_header(self, request=None) -> str:
-        """method 2"""
+        """authorization from header"""
+        if request is not None:
+            return request.headers.get('Authorization', None)
         return None
 
     def current_user(self, request=None) -> TypeVar('User'):
