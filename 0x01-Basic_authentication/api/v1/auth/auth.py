@@ -20,7 +20,7 @@ class Auth:
                     pattern = '{}.*'.format(i)
                 if re.match(pattern, path):
                     return False
-            return True
+        return True
 
     def authorization_header(self, request=None) -> str:
         """method 2"""
