@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""session authorization"""
+"""session authorization module"""
 from auth import Auth
 from uuid import uuid4
 
