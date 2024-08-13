@@ -7,7 +7,7 @@ from models.user import User
 from api.v1.views import app_views
 
 
-@app_views.route('/auth_session/login', method=['POST'], strict_slashes=False)
+@app_views.route('/auth_session/login', methods=['POST'], strict_slashes=False)
 def login() -> Tuple[str, int]:
     """POST /api/v1/auth_session/login
     Return:
