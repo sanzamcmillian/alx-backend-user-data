@@ -2,6 +2,7 @@
 """session authorization module"""
 from .auth import Auth
 from uuid import uuid4
+from flask import request
 
 
 class SessionAuth(Auth):
