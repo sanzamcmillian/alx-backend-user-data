@@ -10,13 +10,14 @@ def _hash_password(password: str) -> bytes:
     """method to hash a password"""
     return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
 
     def __init__(self):
         self._db = DB()
-    
+
     def register_user(self, email: str, password: str) -> User:
         """method to register user"""
         try:
