@@ -8,8 +8,8 @@ Base = declarative_base()
 
 
 class User(Base):
-    """class to implement User"""
-    __tablename__ = 'User'
+    """class to implement table User"""
+    __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
     email = Column(String(250), nullable=False)
